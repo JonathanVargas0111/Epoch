@@ -48,17 +48,42 @@ A lightweight menu bar app to manage multiple time zones and stay organized with
 
 Download the latest version from the [Releases page](https://github.com/JonathanVargas0111/Epoch/releases/latest):
 
-- **[Clock & Calendar.dmg](https://github.com/JonathanVargas0111/Epoch/releases/latest/download/Clock%20&%20Calendar-1.0.0-arm64.dmg)** - DMG installer (recommended)
-- **[Clock & Calendar.zip](https://github.com/JonathanVargas0111/Epoch/releases/latest/download/Clock%20&%20Calendar-1.0.0-arm64-mac.zip)** - ZIP archive
+- **[Epoch.dmg](https://github.com/JonathanVargas0111/Epoch/releases/latest)** - DMG installer (recommended)
+- **[Epoch.zip](https://github.com/JonathanVargas0111/Epoch/releases/latest)** - ZIP archive
 
 > **Note:** Currently supports Apple Silicon (M1/M2/M3) Macs only.
 
 ### Install
 
-1. Download the DMG file
-2. Open the DMG and drag **Clock & Calendar** to your Applications folder
-3. Launch from Applications
-4. The app will appear in your menu bar
+1. Download the DMG or ZIP file
+2. Open the DMG and drag **Epoch** to your Applications folder (or extract the ZIP)
+3. **Important:** Since Epoch is not code-signed, macOS will block it on first launch
+
+### First Launch (macOS Gatekeeper)
+
+When you first try to open Epoch, macOS will show a warning saying the app is "damaged" or "from an unidentified developer." This is normal for unsigned apps. Follow these steps:
+
+**Option 1 - Recommended (Right-click method):**
+1. Open Finder and go to Applications
+2. Find **Epoch**
+3. **Right-click** (or Control-click) on Epoch
+4. Select **Open** from the menu
+5. Click **Open** in the dialog that appears
+6. The app will now launch and appear in your menu bar
+
+**Option 2 - System Settings:**
+1. Try to open Epoch normally (it will be blocked)
+2. Go to **System Settings** > **Privacy & Security**
+3. Scroll down to find the message about Epoch being blocked
+4. Click **Open Anyway**
+5. Confirm by clicking **Open**
+
+**Option 3 - Terminal (Advanced):**
+```bash
+xattr -cr /Applications/Epoch.app
+```
+
+> **Why is this needed?** Epoch is currently unsigned (code signing requires a $99/year Apple Developer account). The app is completely safe and open source - you can review all the code in this repository.
 
 ---
 
