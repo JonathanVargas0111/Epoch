@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reloj y Calendario</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container horizontal">
+    <!-- Header with settings button -->
+    <div class="header-section">
+      <div class="header-title">Clock & Calendar</div>
+      <button id="settingsBtn" class="settings-btn">⚙️</button>
+    </div>
+
+    <!-- Clocks Section -->
+    <div class="clocks-section" id="clocksContainer">
+      <!-- Clocks will be generated dynamically -->
+    </div>
+
+    <!-- Add Clock Button -->
+    <div class="add-clock-section">
+      <button id="addClockBtn" class="add-btn">+ Add Clock</button>
+    </div>
+
+    <!-- Calendar Section -->
+    <div class="calendar-section">
+      <div class="calendar-header">
+        <button id="prevMonth" class="nav-btn">&lt;</button>
+        <span id="currentMonth">Month Year</span>
+        <button id="nextMonth" class="nav-btn">&gt;</button>
+      </div>
+      <div class="calendar-grid">
+        <div class="day-header">S</div>
+        <div class="day-header">M</div>
+        <div class="day-header">T</div>
+        <div class="day-header">W</div>
+        <div class="day-header">T</div>
+        <div class="day-header">F</div>
+        <div class="day-header">S</div>
+        <!-- Days will be added dynamically -->
+      </div>
+    </div>
+
+    <!-- Timezone Configuration -->
+    <div id="timezoneModal" class="modal hidden">
+      <div class="modal-content">
+        <h3>Add Clock</h3>
+        <label class="input-label">Timezone</label>
+        <select id="timezoneSelect" class="timezone-select">
+          <option value="America/New_York">New York (EST)</option>
+          <option value="America/Los_Angeles">Los Angeles (PST)</option>
+          <option value="America/Chicago">Chicago (CST)</option>
+          <option value="Europe/London">London (GMT)</option>
+          <option value="Europe/Paris">Paris (CET)</option>
+          <option value="Europe/Madrid">Madrid (CET)</option>
+          <option value="Asia/Tokyo">Tokyo (JST)</option>
+          <option value="Asia/Shanghai">Shanghai (CST)</option>
+          <option value="Australia/Sydney">Sydney (AEDT)</option>
+          <option value="America/Mexico_City">Mexico City</option>
+          <option value="America/Bogota">Bogotá</option>
+          <option value="America/Argentina/Buenos_Aires">Buenos Aires</option>
+        </select>
+        <label class="input-label">Custom Label (optional)</label>
+        <input type="text" id="clockLabel" class="clock-label-input" placeholder="e.g., Home, Office, Parents...">
+        <div class="modal-buttons">
+          <button id="cancelBtn" class="btn-cancel">Cancel</button>
+          <button id="saveClockBtn" class="btn-save">Add</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="modal hidden">
+      <div class="modal-content modal-settings">
+        <h3>⚙️ Settings</h3>
+
+        <div class="settings-section">
+          <h4>Layout</h4>
+          <div class="layout-preview-options">
+            <label class="layout-preview-option">
+              <input type="radio" name="layout" value="horizontal" checked>
+              <div class="layout-preview-box">
+                <div class="preview-left"></div>
+                <div class="preview-right"></div>
+              </div>
+              <span class="layout-preview-label">Horizontal</span>
+            </label>
+            <label class="layout-preview-option">
+              <input type="radio" name="layout" value="vertical">
+              <div class="layout-preview-box vertical">
+                <div class="preview-top"></div>
+                <div class="preview-bottom"></div>
+              </div>
+              <span class="layout-preview-label">Vertical</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <h4>Menu Bar Icon</h4>
+          <div class="icon-text-options">
+            <label class="icon-text-option">
+              <input type="radio" name="iconStyle" value="time" checked>
+              <span class="icon-text-preview">12:34</span>
+              <span class="icon-text-label">Time</span>
+            </label>
+            <label class="icon-text-option">
+              <input type="radio" name="iconStyle" value="numeric-date">
+              <span class="icon-text-preview">22/12</span>
+              <span class="icon-text-label">Date</span>
+            </label>
+            <label class="icon-text-option">
+              <input type="radio" name="iconStyle" value="month-day">
+              <span class="icon-text-preview">DEC 22</span>
+              <span class="icon-text-label">Month + Day</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <h4>Font Size</h4>
+          <div class="icon-text-options">
+            <label class="icon-text-option">
+              <input type="radio" name="fontSize" value="small">
+              <span class="icon-text-preview" style="font-size: 14px;">Aa</span>
+              <span class="icon-text-label">Small</span>
+            </label>
+            <label class="icon-text-option">
+              <input type="radio" name="fontSize" value="medium" checked>
+              <span class="icon-text-preview" style="font-size: 18px;">Aa</span>
+              <span class="icon-text-label">Medium</span>
+            </label>
+            <label class="icon-text-option">
+              <input type="radio" name="fontSize" value="large">
+              <span class="icon-text-preview" style="font-size: 22px;">Aa</span>
+              <span class="icon-text-label">Large</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="modal-buttons">
+          <button id="settingsCancelBtn" class="btn-cancel">Cancel</button>
+          <button id="settingsSaveBtn" class="btn-save">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>

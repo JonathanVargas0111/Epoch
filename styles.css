@@ -1,0 +1,722 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background-color: #1e1e1e;
+  color: #ffffff;
+  overflow: hidden;
+}
+
+/* Font Size Classes */
+.container.font-small .header-title {
+  font-size: 12px;
+}
+
+.container.font-small .clock-label {
+  font-size: 9px;
+}
+
+.container.font-small .time-diff {
+  font-size: 8px;
+}
+
+.container.font-small .clock-time {
+  font-size: 16px;
+}
+
+.container.font-small .clock-date {
+  font-size: 9px;
+}
+
+.container.font-small #currentMonth {
+  font-size: 12px;
+}
+
+.container.font-small .day-header {
+  font-size: 9px;
+}
+
+.container.font-small .day-cell {
+  font-size: 10px;
+}
+
+.container.font-small .add-btn {
+  font-size: 10px;
+}
+
+/* Medium es el tamaño por defecto - no necesita clases adicionales */
+
+.container.font-large .header-title {
+  font-size: 16px;
+}
+
+.container.font-large .clock-label {
+  font-size: 11px;
+}
+
+.container.font-large .time-diff {
+  font-size: 10px;
+}
+
+.container.font-large .clock-time {
+  font-size: 24px;
+}
+
+.container.font-large .clock-date {
+  font-size: 13px;
+}
+
+.container.font-large #currentMonth {
+  font-size: 16px;
+}
+
+.container.font-large .day-header {
+  font-size: 12px;
+}
+
+.container.font-large .day-cell {
+  font-size: 14px;
+}
+
+.container.font-large .add-btn {
+  font-size: 14px;
+}
+
+.container {
+  width: 560px;
+  background-color: #2d2d2d;
+  border-radius: 6px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  padding: 12px;
+  max-height: 450px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 190px 1fr;
+  grid-template-rows: auto 1fr;
+  gap: 12px;
+}
+
+/* Layout Horizontal */
+.container.horizontal {
+  grid-template-columns: 190px 1fr;
+}
+
+.container.horizontal .header-section {
+  grid-column: 1 / -1;
+}
+
+.container.horizontal .clocks-section {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.container.horizontal .add-clock-section {
+  grid-column: 1;
+  grid-row: 3;
+}
+
+.container.horizontal .calendar-section {
+  grid-column: 2;
+  grid-row: 2 / 4;
+}
+
+/* Layout Vertical */
+.container.vertical {
+  width: 320px;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto auto 1fr;
+}
+
+.container.vertical .header-section {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.container.vertical .clocks-section {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.container.vertical .add-clock-section {
+  grid-column: 1;
+  grid-row: 3;
+}
+
+.container.vertical .calendar-section {
+  grid-column: 1;
+  grid-row: 4;
+}
+
+.header-section {
+  grid-column: 1 / -1;
+}
+
+.clocks-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  overflow-y: auto;
+}
+
+.add-clock-section {
+  margin-top: auto;
+}
+
+.calendar-section {
+  overflow-y: auto;
+}
+
+/* Header */
+.header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #4a4a4a;
+}
+
+.header-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.settings-btn {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 3px 6px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.settings-btn:hover {
+  background-color: #4a4a4a;
+}
+
+/* Sección de Relojes - ya está definida arriba en grid */
+
+.clock-item {
+  background-color: #3a3a3a;
+  border-radius: 5px;
+  padding: 8px 10px;
+  margin-bottom: 6px;
+  position: relative;
+  cursor: grab;
+  user-select: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.clock-item .delete-btn {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background-color: rgba(74, 74, 74, 0.8);
+  border: none;
+  border-radius: 3px;
+  color: #aaa;
+  width: 16px;
+  height: 16px;
+  font-size: 10px;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s, background-color 0.2s, color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.clock-item:hover .delete-btn {
+  opacity: 1;
+}
+
+.clock-item .delete-btn:hover {
+  background-color: rgba(85, 85, 85, 1);
+  color: #fff;
+}
+
+.clock-item:active {
+  cursor: grabbing;
+}
+
+.clock-item.dragging {
+  opacity: 0.5;
+  transform: scale(0.95);
+}
+
+.clock-item.drag-over {
+  border: 2px dashed #007aff;
+  box-shadow: 0 0 10px rgba(0, 122, 255, 0.5);
+}
+
+.clock-label {
+  font-size: 10px;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 3px;
+}
+
+.time-diff {
+  font-size: 9px;
+  color: #666;
+  font-weight: 400;
+  margin-left: 3px;
+}
+
+.clock-time {
+  font-size: 20px;
+  font-weight: 600;
+  color: #ffffff;
+  font-variant-numeric: tabular-nums;
+}
+
+.clock-date {
+  font-size: 11px;
+  color: #aaa;
+  margin-top: 2px;
+}
+
+/* Botón agregar reloj */
+.add-clock-section {
+  margin-bottom: 15px;
+}
+
+.add-btn {
+  width: 100%;
+  padding: 8px;
+  background-color: #4a4a4a;
+  border: 1px dashed #666;
+  border-radius: 5px;
+  color: #aaa;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.2s;
+}
+
+.add-btn:hover {
+  background-color: #555;
+  border-color: #888;
+  color: #fff;
+}
+
+/* Calendario */
+.calendar-section {
+  background-color: #3a3a3a;
+  border-radius: 6px;
+  padding: 12px;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.nav-btn {
+  background-color: #4a4a4a;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+  padding: 6px 12px;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.nav-btn:hover {
+  background-color: #555;
+}
+
+#currentMonth {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.day-header {
+  text-align: center;
+  font-size: 11px;
+  color: #888;
+  padding: 4px;
+  font-weight: 600;
+}
+
+.day-cell {
+  text-align: center;
+  padding: 6px;
+  font-size: 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.day-cell:hover {
+  background-color: #4a4a4a;
+}
+
+.day-cell.other-month {
+  color: #555;
+}
+
+.day-cell.today {
+  background-color: #007aff;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* Modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-content {
+  background-color: #2d2d2d;
+  border-radius: 8px;
+  padding: 20px;
+  width: 280px;
+}
+
+.modal-content h3 {
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+.input-label {
+  display: block;
+  font-size: 12px;
+  color: #aaa;
+  margin-bottom: 6px;
+  margin-top: 8px;
+}
+
+.timezone-select,
+.clock-label-input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  background-color: #3a3a3a;
+  border: 1px solid #4a4a4a;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 14px;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.btn-cancel,
+.btn-save {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.btn-cancel {
+  background-color: #4a4a4a;
+  color: #fff;
+}
+
+.btn-cancel:hover {
+  background-color: #555;
+}
+
+.btn-save {
+  background-color: #007aff;
+  color: #fff;
+}
+
+.btn-save:hover {
+  background-color: #0066cc;
+}
+
+/* Scrollbar personalizada */
+.container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.container::-webkit-scrollbar-track {
+  background: #2d2d2d;
+}
+
+.container::-webkit-scrollbar-thumb {
+  background: #4a4a4a;
+  border-radius: 4px;
+}
+
+.container::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Modal de Configuración */
+.modal-settings {
+  width: 400px;
+  max-width: 90vw;
+}
+
+.settings-section {
+  margin-bottom: 20px;
+}
+
+.settings-section h4 {
+  font-size: 13px;
+  color: #aaa;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.icon-options {
+  display: flex;
+  gap: 10px;
+}
+
+.icon-option {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px;
+  background-color: #3a3a3a;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.icon-option:hover {
+  background-color: #4a4a4a;
+}
+
+.icon-option input[type="radio"] {
+  display: none;
+}
+
+.icon-option input[type="radio"]:checked + .icon-preview {
+  color: #007aff;
+}
+
+.icon-option input[type="radio"]:checked ~ .icon-label {
+  color: #007aff;
+}
+
+.icon-option:has(input[type="radio"]:checked) {
+  border-color: #007aff;
+  background-color: rgba(0, 122, 255, 0.1);
+}
+
+.icon-preview {
+  font-size: 24px;
+  margin-bottom: 6px;
+}
+
+.icon-preview.emoji-preview {
+  display: none;
+}
+
+.icon-label {
+  font-size: 11px;
+  color: #aaa;
+}
+
+/* Icon Text Options */
+.icon-text-options {
+  display: flex;
+  gap: 10px;
+}
+
+.icon-text-option {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px;
+  background-color: #3a3a3a;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.icon-text-option:hover {
+  background-color: #4a4a4a;
+}
+
+.icon-text-option input[type="radio"] {
+  display: none;
+}
+
+.icon-text-option:has(input[type="radio"]:checked) {
+  border-color: #007aff;
+  background-color: rgba(0, 122, 255, 0.1);
+}
+
+.icon-text-preview {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+}
+
+.icon-text-label {
+  font-size: 11px;
+  color: #aaa;
+}
+
+.icon-text-option:has(input[type="radio"]:checked) .icon-text-label {
+  color: #007aff;
+}
+
+/* Layout Preview Options */
+.layout-preview-options {
+  display: flex;
+  gap: 12px;
+}
+
+.layout-preview-option {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px;
+  background-color: #3a3a3a;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.layout-preview-option:hover {
+  background-color: #4a4a4a;
+}
+
+.layout-preview-option input[type="radio"] {
+  display: none;
+}
+
+.layout-preview-option:has(input[type="radio"]:checked) {
+  border-color: #007aff;
+  background-color: rgba(0, 122, 255, 0.1);
+}
+
+.layout-preview-box {
+  width: 90px;
+  height: 70px;
+  border: 1px solid #555;
+  border-radius: 4px;
+  padding: 4px;
+  margin-bottom: 8px;
+  display: flex;
+  gap: 3px;
+}
+
+.layout-preview-box.vertical {
+  flex-direction: column;
+}
+
+.preview-left,
+.preview-right,
+.preview-top,
+.preview-bottom {
+  background-color: #555;
+  border-radius: 2px;
+}
+
+.preview-left {
+  flex: 0 0 35%;
+}
+
+.preview-right {
+  flex: 1;
+}
+
+.preview-top {
+  flex: 0 0 35%;
+}
+
+.preview-bottom {
+  flex: 1;
+}
+
+.layout-preview-label {
+  font-size: 11px;
+  color: #aaa;
+  text-align: center;
+}
+
+.layout-preview-option:has(input[type="radio"]:checked) .layout-preview-label {
+  color: #007aff;
+  font-weight: 600;
+}
+
+.order-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.order-option {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: #3a3a3a;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.order-option:hover {
+  background-color: #4a4a4a;
+}
+
+.order-option input[type="checkbox"] {
+  margin-right: 10px;
+  accent-color: #007aff;
+}
+
+.order-option span {
+  font-size: 13px;
+  color: #fff;
+}
+
+/* Visibilidad de secciones */
+.clocks-section.hidden,
+.calendar-section.hidden {
+  display: none;
+}
