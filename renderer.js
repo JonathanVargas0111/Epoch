@@ -381,7 +381,8 @@ function handleDragEnd(e) {
 let settings = {
   layout: 'horizontal',  // horizontal, vertical
   iconStyle: 'time',  // time, numeric-date, month-day
-  fontSize: 'medium'  // small, medium, large
+  fontSize: 'medium',  // small, medium, large
+  theme: 'dark'  // dark, light, glass
 };
 
 // Abrir modal de configuración
@@ -390,6 +391,7 @@ document.getElementById('settingsBtn').addEventListener('click', () => {
   document.querySelector(`input[name="layout"][value="${settings.layout}"]`).checked = true;
   document.querySelector(`input[name="iconStyle"][value="${settings.iconStyle}"]`).checked = true;
   document.querySelector(`input[name="fontSize"][value="${settings.fontSize}"]`).checked = true;
+  document.querySelector(`input[name="theme"][value="${settings.theme}"]`).checked = true;
   document.getElementById('settingsModal').classList.remove('hidden');
 });
 
@@ -404,6 +406,7 @@ document.getElementById('settingsSaveBtn').addEventListener('click', () => {
   settings.layout = document.querySelector('input[name="layout"]:checked').value;
   settings.iconStyle = document.querySelector('input[name="iconStyle"]:checked').value;
   settings.fontSize = document.querySelector('input[name="fontSize"]:checked').value;
+  settings.theme = document.querySelector('input[name="theme"]:checked').value;
 
   // Aplicar configuración
   applySettings();
@@ -422,6 +425,10 @@ function applySettings() {
   // Aplicar font size
   container.classList.remove('font-small', 'font-medium', 'font-large');
   container.classList.add(`font-${settings.fontSize}`);
+
+  // Aplicar theme
+  container.classList.remove('theme-dark', 'theme-light');
+  container.classList.add(`theme-${settings.theme}`);
 
   // Actualizar ícono en la barra
   ipcRenderer.send('update-tray-icon', settings.iconStyle);
