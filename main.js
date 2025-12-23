@@ -35,7 +35,7 @@ function createTray() {
   // Crear un ícono vacío pero usar setTitle para mostrar un emoji/texto
   tray = new Tray(nativeImage.createEmpty());
   tray.setTitle('🕐'); // Emoji de reloj
-  tray.setToolTip('Reloj y Calendario - Haz clic para abrir');
+  tray.setToolTip('Epoch - Multi-timezone world clock');
 
   tray.on('click', () => {
     toggleWindow();
@@ -115,6 +115,11 @@ ipcMain.on('change-layout', (event, layout) => {
 ipcMain.on('open-calendar', () => {
   const { shell } = require('electron');
   shell.openPath('/System/Applications/Calendar.app');
+});
+
+// Quit the app
+ipcMain.on('quit-app', () => {
+  app.quit();
 });
 
 app.whenReady().then(() => {

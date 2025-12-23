@@ -3,15 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reloj y Calendario</title>
+  <title>Epoch</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="container horizontal">
     <!-- Header with settings button -->
     <div class="header-section">
-      <div class="header-title">Clock & Calendar</div>
-      <button id="settingsBtn" class="settings-btn">⚙️</button>
+      <div class="header-title">Epoch</div>
+      <div class="header-buttons">
+        <button id="quitBtn" class="quit-btn" title="Quit Epoch">Quit</button>
+        <button id="settingsBtn" class="settings-btn" title="Settings">⚙️</button>
+      </div>
     </div>
 
     <!-- Clocks Section -->
@@ -22,6 +25,7 @@
     <!-- Add Clock Button -->
     <div class="add-clock-section">
       <button id="addClockBtn" class="add-btn">+ Add Clock</button>
+      <button id="copyAllBtn" class="copy-all-btn" title="Copy all times to clipboard">📋 Copy All</button>
     </div>
 
     <!-- Calendar Section -->

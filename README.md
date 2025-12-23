@@ -37,8 +37,10 @@ A lightweight menu bar app to manage multiple time zones and stay organized with
 
 ### Productivity
 - **Keyboard shortcut** - Toggle window with `Cmd+Shift+C`
+- **Copy all times** - Copy all timezone times to clipboard with one click
 - **Persistent storage** - Your clocks are saved automatically
 - **Duplicate prevention** - Can't add the same timezone twice
+- **Quit button** - Easy app exit from the interface
 
 ---
 

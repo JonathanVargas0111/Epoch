@@ -1,7 +1,7 @@
 {
   "name": "epoch",
   "productName": "Epoch",
-  "version": "1.2.0",
+  "version": "1.0.0",
   "description": "Multi-timezone world clock and calendar menu bar app",
   "main": "main.js",
   "scripts": {

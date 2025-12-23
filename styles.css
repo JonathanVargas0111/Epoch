@@ -189,7 +189,12 @@ body {
   color: #ffffff;
 }
 
-.settings-btn {
+.header-buttons {
+  display: flex;
+  gap: 4px;
+}
+
+.settings-btn, .quit-btn {
   background: none;
   border: none;
   font-size: 16px;
@@ -199,8 +204,20 @@ body {
   transition: background-color 0.2s;
 }
 
+.quit-btn {
+  font-size: 11px;
+  font-weight: 500;
+  color: #aaa;
+  padding: 4px 8px;
+}
+
 .settings-btn:hover {
   background-color: #4a4a4a;
+}
+
+.quit-btn:hover {
+  background-color: #ff453a;
+  color: #ffffff;
 }
 
 /* Sección de Relojes - ya está definida arriba en grid */
@@ -291,10 +308,12 @@ body {
 /* Botón agregar reloj */
 .add-clock-section {
   margin-bottom: 15px;
+  display: flex;
+  gap: 6px;
 }
 
 .add-btn {
-  width: 100%;
+  flex: 1;
   padding: 8px;
   background-color: #4a4a4a;
   border: 1px dashed #666;
@@ -309,6 +328,26 @@ body {
   background-color: #555;
   border-color: #888;
   color: #fff;
+}
+
+.copy-all-btn {
+  padding: 8px 12px;
+  background-color: #007aff;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 12px;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+
+.copy-all-btn:hover {
+  background-color: #0051d5;
+}
+
+.copy-all-btn:active {
+  transform: scale(0.95);
 }
 
 /* Calendario */

@@ -246,6 +246,31 @@ document.getElementById('addClockBtn').addEventListener('click', () => {
   document.getElementById('timezoneModal').classList.remove('hidden');
 });
 
+// Copy all times to clipboard
+document.getElementById('copyAllBtn').addEventListener('click', () => {
+  let allTimes = '';
+  clocks.forEach(clock => {
+    const element = document.getElementById(clock.id);
+    if (element) {
+      const timeText = element.querySelector('.clock-time').textContent;
+      const dateText = element.querySelector('.clock-date').textContent;
+      allTimes += `${clock.label}: ${timeText} ${dateText}\n`;
+    }
+  });
+
+  navigator.clipboard.writeText(allTimes.trim()).then(() => {
+    // Visual feedback
+    const btn = document.getElementById('copyAllBtn');
+    const originalText = btn.textContent;
+    btn.textContent = '✓ Copied!';
+    btn.style.backgroundColor = '#34c759';
+    setTimeout(() => {
+      btn.textContent = originalText;
+      btn.style.backgroundColor = '';
+    }, 1500);
+  });
+});
+
 document.getElementById('cancelBtn').addEventListener('click', () => {
   document.getElementById('timezoneModal').classList.add('hidden');
 });
@@ -386,6 +411,11 @@ let settings = {
 };
 
 // Abrir modal de configuración
+// Quit button
+document.getElementById('quitBtn').addEventListener('click', () => {
+  ipcRenderer.send('quit-app');
+});
+
 document.getElementById('settingsBtn').addEventListener('click', () => {
   // Cargar configuración actual
   document.querySelector(`input[name="layout"][value="${settings.layout}"]`).checked = true;
