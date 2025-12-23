@@ -1,7 +1,7 @@
 {
   "name": "clock-calendar",
   "productName": "Clock & Calendar",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Multi-timezone world clock and calendar menu bar app",
   "main": "main.js",
   "scripts": {
@@ -18,13 +18,15 @@
     "productName": "Clock & Calendar",
     "mac": {
       "category": "public.app-category.utilities",
-      "target": ["dmg", "zip"]
+      "target": ["dmg", "zip"],
+      "icon": "icon.icns"
     },
     "files": [
       "main.js",
       "renderer.js",
       "index.html",
-      "styles.css"
+      "styles.css",
+      "icon.icns"
     ],
     "directories": {
       "output": "dist"
